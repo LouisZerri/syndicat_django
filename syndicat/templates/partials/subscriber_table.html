@@ -1,0 +1,38 @@
+{% if page_obj.object_list %}
+    {% for subscriber in page_obj %}
+        <tr id="row-{{ subscriber.id }}">
+            <td class="px-4 py-2 text-sm">{{ subscriber.name }}</td>
+            <td class="px-4 py-2 text-sm text-blue-600">{{ subscriber.customer.first_name }} {{ subscriber.customer.last_name }}</td>
+            <td class="px-4 py-2 text-sm break-words">{{ subscriber.customer.email }}</td>
+            <td class="px-4 py-2 text-sm">{{ subscriber.phone }}</td>
+            <td class="px-4 py-2 text-sm">{{ subscriber.adress }}</td>
+            <td class="px-4 py-2 text-sm">{{ subscriber.postal_code }}</td>
+            <td class="px-4 py-2 text-sm">{{ subscriber.city }}</td>
+            <td class="px-4 py-2 text-sm">{{ subscriber.siret }}</td>
+            <td class="px-4 py-2 text-sm">{{ subscriber.returned_report }}</td>
+            <td class="px-4 py-2 flex space-x-4">
+                <a href="{% url 'edit_subscriber' subscriber.id %}" class="text-blue-500 hover:text-blue-700"
+                   title="Éditer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                </a>
+                <a href="#" data-id="{{ subscriber.id }}" class="text-red-500 hover:text-red-700 delete-btn"
+                   title="Supprimer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0H7"></path>
+                    </svg>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+{% else %}
+    <tr>
+        <td colspan="9" class="text-center text-gray-500 py-4">Aucun résultat trouvé</td>
+    </tr>
+{% endif %}
+

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if success_edit %}
+        <div id="toast-edit"
+             class="fixed top-5 right-5 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 opacity-100 transition-opacity duration-500 ease-in-out">
+            Adhérent mis à jour avec succès !
+        </div>
+    {% endif %}
+    <div id="toast-success"
+         class="fixed top-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden z-50 transition-opacity duration-500 ease-in-out">
+        Adhérent ajouté avec succès !
+    </div>
+
+    <!-- Toast pour le login -->
+    <div id="toast-login"
+         class="fixed top-5 right-5 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 hidden opacity-0 transition-opacity duration-500 ease-in-out">
+        Vous êtes maintenant connecté !
+    </div>
+
+    <div class="w-full">
+        <img src="{% static 'images/page.png' %}" alt="Logo" class="mx-auto h-auto">
+    </div>
+    {% if user.is_superuser %}
+        <div class="p-10">
+            {% include 'filtre_subscriber.html' %}
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 mt-8">
+                    <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Entreprise</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Contact</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Email</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Téléphone</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Adresse</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">CP</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Ville</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Siret</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Bulletin</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-body-container" class="bg-white divide-y divide-gray-100">
+                    {% include "partials/subscriber_table.html" %}
+                    </tbody>
+                </table>
+            </div>
+            {% include 'pagination.html' %}
+        </div>
+    {% else %}
+        <div class="text-center text-gray-600 mt-10">
+            ⛔ Vous n’avez pas les droits pour accéder à ce contenu
+        </div>
+    {% endif %}
+
+{% endblock %}

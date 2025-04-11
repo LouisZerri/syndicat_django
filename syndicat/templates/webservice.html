@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="w-full">
+        <img src="{% static 'images/page.png' %}" alt="Logo" class="mx-auto h-auto">
+    </div>
+    <div class="max-w-xl mx-auto bg-white p-6 rounded shadow mt-5">
+        <h1 class="text-xl font-semibold mb-4 text-gray-700">Vérifier un SIRET</h1>
+
+        <div class="flex space-x-4 mb-4">
+            <input id="siret-input" type="text" placeholder="Entrez un SIRET"
+                   class="w-full px-4 py-2 border rounded focus:ring focus:border-blue-300">
+            <button id="check-btn"
+                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Vérifier
+            </button>
+        </div>
+        <pre id="xml-output" class="language-xml rounded bg-gray-100 p-4 text-sm whitespace-pre-wrap hidden">
+            <code class="language-xml"></code>
+        </pre>
+    </div>
+
+    <script src="{% static 'js/webservice.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="static/images/logo.ico"/>
+    <title>Syndicat de la filière bois</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Prism.js CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet"/>
+
+    <!-- Prism.js core -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
+
+    <!-- XML language -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+
+</head>
+<body>
+{% if user.is_authenticated %}
+    <nav class="bg-gray-50 border-b border-gray-200">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/accueil" class="text-xl font-semibold text-gray-800">
+                Syndicat de la Filière Bois
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="/accueil" class="text-gray-700 hover:text-gray-900 transition">Accueil</a>
+                <a href="https://www.sfbois.com" class="text-gray-700 hover:text-gray-900 transition">Notre site
+                    officiel</a>
+                <a href="/ajouter-adherent" class="text-gray-700 hover:text-gray-900 transition">Ajouter un adhérent</a>
+                <a href="/webservice" class="text-gray-700 hover:text-gray-900 transition">Interroger le webservice</a>
+                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="text-gray-700 cursor-pointer">Déconnexion</button>
+                </form>
+            </div>
+            <!-- Bouton hamburger mobile -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-700 focus:outline-none text-2xl">
+                    ☰
+                </button>
+            </div>
+        </div>
+        <!-- Menu mobile -->
+        <div id="mobile-menu" class="md:hidden px-4 pb-4 hidden">
+            <a href="/accueil" class="block py-2 text-gray-700 hover:text-gray-900 transition">Accueil</a>
+            <a href="https://www.sfbois.com" class="block py-2 text-gray-700 hover:text-gray-900 transition">Notre site
+                officiel</a>
+            <a href="/ajouter-adherent" class="block py-2 text-gray-700 hover:text-gray-900 transition">Ajouter un
+                adhérent</a>
+            <a href="/webservice" class="block py-2 text-gray-700 hover:text-gray-900 transition">Intérroger le
+                webservice</a>
+            <form id="logout-form" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="text-gray-700 cursor-pointer">Déconnexion</button>
+            </form>
+        </div>
+    </nav>
+{% else %}
+    <nav class="bg-gray-50 border-b border-gray-200">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="text-xl font-semibold text-gray-800">
+                Syndicat de la Filière Bois
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="https://www.sfbois.com" class="text-gray-700 hover:text-gray-900 transition">Notre site
+                    officiel</a>
+                <a href="/ajouter-adherent" class="text-gray-700 hover:text-gray-900 transition">Ajouter un adherent</a>
+                <a href="/register" class="text-gray-700 hover:text-gray-900 transition">S'enregistrer</a>
+            </div>
+            <!-- Bouton hamburger mobile -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-700 focus:outline-none text-2xl">
+                    ☰
+                </button>
+            </div>
+        </div>
+        <!-- Menu mobile -->
+        <div id="mobile-menu" class="md:hidden px-4 pb-4 hidden">
+            <a href="#" class="block py-2 text-gray-700 hover:text-gray-900 transition">Notre site officiel</a>
+            <a href="/ajouter-adherent" class="block py-2 text-gray-700 hover:text-gray-900 transition">Ajouter un
+                adhérent</a>
+            <a href="/ajouter-adherent"
+               class="block py-2 text-gray-700 hover:text-gray-900 transition">S'enregistrer</a>
+        </div>
+    </nav>
+{% endif %}
+
+<div class="mx-auto mt-8">
+    {% block content %}{% endblock %}
+</div>
+
+{% load static %}
+<script src="{% static 'js/app.js' %}"></script>
+
+
+
+</body>
+</html>
